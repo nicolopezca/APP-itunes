@@ -15,6 +15,8 @@
 		7F7A74F127688CA600E153FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A74EF27688CA600E153FC /* LaunchScreen.storyboard */; };
 		7F7A74FC27688CA600E153FC /* AppItunesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A74FB27688CA600E153FC /* AppItunesTests.swift */; };
 		7F7A750727688CA600E153FC /* AppItunesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A750627688CA600E153FC /* AppItunesUITests.swift */; };
+		7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7515276897F600E153FC /* AuthorCell.swift */; };
+		7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A7516276897F600E153FC /* AuthorCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		7F7A750227688CA600E153FC /* AppItunesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppItunesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7A750627688CA600E153FC /* AppItunesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppItunesUITests.swift; sourceTree = "<group>"; };
 		7F7A750827688CA600E153FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F7A7515276897F600E153FC /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
+		7F7A7516276897F600E153FC /* AuthorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		7F7A74E327688CA400E153FC /* AppItunes */ = {
 			isa = PBXGroup;
 			children = (
+				7F7A7514276892CA00E153FC /* ViewComponents */,
 				7F7A74E427688CA400E153FC /* AppDelegate.swift */,
 				7F7A74E627688CA400E153FC /* SceneDelegate.swift */,
 				7F7A74E827688CA400E153FC /* ViewController.swift */,
@@ -126,6 +131,15 @@
 				7F7A750827688CA600E153FC /* Info.plist */,
 			);
 			path = AppItunesUITests;
+			sourceTree = "<group>";
+		};
+		7F7A7514276892CA00E153FC /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A7515276897F600E153FC /* AuthorCell.swift */,
+				7F7A7516276897F600E153FC /* AuthorCell.xib */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +247,7 @@
 			files = (
 				7F7A74F127688CA600E153FC /* LaunchScreen.storyboard in Resources */,
 				7F7A74EE27688CA600E153FC /* Assets.xcassets in Resources */,
+				7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */,
 				7F7A74EC27688CA400E153FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +275,7 @@
 			files = (
 				7F7A74E927688CA400E153FC /* ViewController.swift in Sources */,
 				7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */,
+				7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */,
 				7F7A74E727688CA400E153FC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
