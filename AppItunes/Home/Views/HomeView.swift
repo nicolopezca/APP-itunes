@@ -8,9 +8,9 @@
 import UIKit
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
-    var viewModels: [ItunesAuthorViewModel] = []
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+    private var viewModels: [ItunesAuthorViewModel] = []
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private weak var tableView: UITableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,15 +21,7 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    private func commonInit() {
-        Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        configureTable()
-        createMockViewModels()
-    }
-    
+       
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -44,6 +36,18 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
 }
 
 private extension HomeView {
+    func commonInit() {
+        initSubwiev()
+        configureTable()
+        createMockViewModels()
+    }
+    
+    func initSubwiev() {
+        Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = self.bounds
+    }
+    
     func createMockViewModels() {
         let mockViewModel1 = ItunesAuthorViewModel(author: "Name: Bruno Mars", style: "Style: pop")
         let mockViewModel2 = ItunesAuthorViewModel(author: "Name: Nirvana", style: "Style: punk")
