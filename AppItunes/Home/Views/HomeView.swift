@@ -26,10 +26,7 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
-        let nib = UINib(nibName: "AuthorCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
+        configureTable()
         createMockViewModels()
     }
     
@@ -38,7 +35,9 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as! AuthorCell
+        guard let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as? AuthorCell else {
+            return UITableViewCell()
+        }
         cell.setViewModel(viewModels[indexPath.row])
         return cell
     }
@@ -55,5 +54,12 @@ private extension HomeView {
         viewModels.append(mockViewModel3)
         viewModels.append(mockViewModel4)
         tableView.reloadData()
+    }
+    
+    func configureTable() {
+        let nib = UINib(nibName: AuthorCell.cellReuseIdentifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
