@@ -9,8 +9,8 @@ import UIKit
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     var viewModels: [ItunesAuthorViewModel] = []
-    @IBOutlet weak var homeTableView: UIView!
-    @IBOutlet weak var authorTableView: UITableView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,14 +23,13 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("HomeViewController", owner: self, options: nil)
-        addSubview(homeTableView)
-        homeTableView.frame = self.bounds
-//        homeTableView.autoresizingMask [.flexibleHeight, .flexibleWidth]
+        Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = self.bounds
         let nib = UINib(nibName: "AuthorCell", bundle: nil)
-        authorTableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
-        authorTableView.delegate = self
-        authorTableView.dataSource = self
+        tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
         createMockViewModels()
     }
     
@@ -39,13 +38,13 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: AuthorCell = self.authorTableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as! AuthorCell
+        let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as! AuthorCell
         cell.setViewModel(viewModels[indexPath.row])
         return cell
     }
 }
 
-private extension HomeTableView {
+private extension HomeView {
     func createMockViewModels() {
         let mockViewModel1 = ItunesAuthorViewModel(author: "Name: Bruno Mars", style: "Style: pop")
         let mockViewModel2 = ItunesAuthorViewModel(author: "Name: Nirvana", style: "Style: punk")
@@ -55,5 +54,6 @@ private extension HomeTableView {
         viewModels.append(mockViewModel2)
         viewModels.append(mockViewModel3)
         viewModels.append(mockViewModel4)
+        tableView.reloadData()
     }
 }

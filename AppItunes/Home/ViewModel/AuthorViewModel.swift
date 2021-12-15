@@ -6,3 +6,7 @@
 //
 
 import Foundation
+struct ItunesAuthorViewModel {
+    let author: String
+    let style: String
+}

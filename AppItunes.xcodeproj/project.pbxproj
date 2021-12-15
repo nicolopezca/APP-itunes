@@ -17,6 +17,9 @@
 		7F7A750727688CA600E153FC /* AppItunesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A750627688CA600E153FC /* AppItunesUITests.swift */; };
 		7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7515276897F600E153FC /* AuthorCell.swift */; };
 		7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A7516276897F600E153FC /* AuthorCell.xib */; };
+		7F7A751C2768A81200E153FC /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A751B2768A81200E153FC /* HomeView.xib */; };
+		7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A751D2768A8C200E153FC /* HomeView.swift */; };
+		7F7A75212768B1F800E153FC /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A75202768B1F800E153FC /* AuthorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		7F7A750827688CA600E153FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F7A7515276897F600E153FC /* AuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorCell.swift; sourceTree = "<group>"; };
 		7F7A7516276897F600E153FC /* AuthorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorCell.xib; sourceTree = "<group>"; };
+		7F7A751B2768A81200E153FC /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		7F7A751D2768A8C200E153FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7F7A75202768B1F800E153FC /* AuthorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +109,7 @@
 		7F7A74E327688CA400E153FC /* AppItunes */ = {
 			isa = PBXGroup;
 			children = (
-				7F7A7514276892CA00E153FC /* ViewComponents */,
+				7F7A75192768A7C000E153FC /* Home */,
 				7F7A74E427688CA400E153FC /* AppDelegate.swift */,
 				7F7A74E627688CA400E153FC /* SceneDelegate.swift */,
 				7F7A74E827688CA400E153FC /* ViewController.swift */,
@@ -140,6 +146,33 @@
 				7F7A7516276897F600E153FC /* AuthorCell.xib */,
 			);
 			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		7F7A75192768A7C000E153FC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A7514276892CA00E153FC /* ViewComponents */,
+				7F7A751F2768B1DB00E153FC /* ViewModel */,
+				7F7A751A2768A7C800E153FC /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7F7A751A2768A7C800E153FC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A751B2768A81200E153FC /* HomeView.xib */,
+				7F7A751D2768A8C200E153FC /* HomeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F7A751F2768B1DB00E153FC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A75202768B1F800E153FC /* AuthorViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +280,7 @@
 			files = (
 				7F7A74F127688CA600E153FC /* LaunchScreen.storyboard in Resources */,
 				7F7A74EE27688CA600E153FC /* Assets.xcassets in Resources */,
+				7F7A751C2768A81200E153FC /* HomeView.xib in Resources */,
 				7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */,
 				7F7A74EC27688CA400E153FC /* Main.storyboard in Resources */,
 			);
@@ -273,8 +307,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */,
 				7F7A74E927688CA400E153FC /* ViewController.swift in Sources */,
 				7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */,
+				7F7A75212768B1F800E153FC /* AuthorViewModel.swift in Sources */,
 				7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */,
 				7F7A74E727688CA400E153FC /* SceneDelegate.swift in Sources */,
 			);
