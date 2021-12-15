@@ -21,9 +21,13 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(coder: aDecoder)
         commonInit()
     }
+<<<<<<< HEAD
     
     
     
+=======
+       
+>>>>>>> develop
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -38,13 +42,22 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
 }
 
 private extension HomeView {
+<<<<<<< HEAD
      func commonInit() {
         initSubwiew()
+=======
+    func commonInit() {
+        initSubwiev()
+>>>>>>> develop
         configureTable()
         createMockViewModels()
     }
     
+<<<<<<< HEAD
     func initSubwiew() {
+=======
+    func initSubwiev() {
+>>>>>>> develop
         Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
