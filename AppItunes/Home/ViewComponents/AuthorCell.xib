@@ -16,55 +16,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6O-3a-gar">
-                        <rect key="frame" x="34" y="8" width="268" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Style" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdj-VS-dy3">
-                        <rect key="frame" x="34" y="37" width="268" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-ty-Mwe">
-                        <rect key="frame" x="34" y="71" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HtD-5I-slf">
-                        <rect key="frame" x="34" y="128" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kh-Xv-e5z">
-                        <rect key="frame" x="34" y="100" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TkT-Lg-BeV">
+                        <rect key="frame" x="16" y="8" width="288" height="144"/>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="m6O-3a-gar" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="9D7-h0-2aD"/>
-                    <constraint firstAttribute="trailing" secondItem="m6O-3a-gar" secondAttribute="trailing" constant="18" id="YhA-oI-fCT"/>
-                    <constraint firstItem="Fdj-VS-dy3" firstAttribute="trailing" secondItem="m6O-3a-gar" secondAttribute="trailing" id="gZn-Hp-Zmk"/>
-                    <constraint firstAttribute="bottom" secondItem="Fdj-VS-dy3" secondAttribute="bottom" constant="11" id="h0a-pH-Ntl"/>
-                    <constraint firstItem="Fdj-VS-dy3" firstAttribute="top" secondItem="m6O-3a-gar" secondAttribute="bottom" constant="8" id="nDc-9q-7Dd"/>
-                    <constraint firstItem="Fdj-VS-dy3" firstAttribute="leading" secondItem="m6O-3a-gar" secondAttribute="leading" id="pNj-MX-lke"/>
-                    <constraint firstAttribute="bottom" secondItem="m6O-3a-gar" secondAttribute="bottom" constant="43" id="uOA-wY-zlT"/>
-                    <constraint firstItem="m6O-3a-gar" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="34" id="yka-zb-lkS"/>
+                    <constraint firstAttribute="bottom" secondItem="TkT-Lg-BeV" secondAttribute="bottom" constant="8" id="MOm-CQ-e50"/>
+                    <constraint firstItem="TkT-Lg-BeV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="g7n-Xr-eS8"/>
+                    <constraint firstAttribute="trailing" secondItem="TkT-Lg-BeV" secondAttribute="trailing" constant="16" id="iaO-op-N0t"/>
+                    <constraint firstItem="TkT-Lg-BeV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="xbc-9N-JF5"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="authorLabel" destination="m6O-3a-gar" id="RlQ-Z4-BYe"/>
-                <outlet property="styleLabel" destination="Fdj-VS-dy3" id="OTq-2T-SC8"/>
+                <outlet property="labelsStack" destination="TkT-Lg-BeV" id="CBc-Em-e2U"/>
             </connections>
             <point key="canvasLocation" x="139" y="98"/>
         </tableViewCell>
