@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
-    private var viewModels: [CompletedViewModel] = []
+    private var viewModels: [ItunesAuthorViewModel] = []
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -21,7 +21,13 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(coder: aDecoder)
         commonInit()
     }
-
+<<<<<<< HEAD
+    
+    
+    
+=======
+       
+>>>>>>> develop
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -36,26 +42,32 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
 }
 
 private extension HomeView {
+<<<<<<< HEAD
+     func commonInit() {
+        initSubwiew()
+=======
     func commonInit() {
-        initSubView()
+        initSubwiev()
+>>>>>>> develop
         configureTable()
         createMockViewModels()
     }
     
-    func initSubView() {
+<<<<<<< HEAD
+    func initSubwiew() {
+=======
+    func initSubwiev() {
+>>>>>>> develop
         Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
     }
-
+    
     func createMockViewModels() {
-        let discography3: [String] = ["disco1", "disco2", "disco3"]
-        let discography2: [String] = ["disco1", "disco2"]
-        let discography1: [String] = ["disco4"]
-        let mockViewModel1 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography2)
-        let mockViewModel2 = CompletedViewModel(author: "Pepe", style: "pop")
-        let mockViewModel3 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography3)
-        let mockViewModel4 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography1)
+        let mockViewModel1 = ItunesAuthorViewModel(author: "Name: Bruno Mars", style: "Style: pop")
+        let mockViewModel2 = ItunesAuthorViewModel(author: "Name: Nirvana", style: "Style: punk")
+        let mockViewModel3 = ItunesAuthorViewModel(author: "Name: Daft punk", style: "Style: electronic")
+        let mockViewModel4 = ItunesAuthorViewModel(author: "Name: Drake", style: "Style: rap")
         viewModels.append(mockViewModel1)
         viewModels.append(mockViewModel2)
         viewModels.append(mockViewModel3)
