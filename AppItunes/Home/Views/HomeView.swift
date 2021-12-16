@@ -47,12 +47,15 @@ private extension HomeView {
         addSubview(contentView)
         contentView.frame = self.bounds
     }
-    
+
     func createMockViewModels() {
-        let mockViewModel1 = CompletedViewModel(author: "Pepe", style: "Rock", firstDisc: "Pepe canta", secondDisc: "Pepe hits")
-        let mockViewModel2 = CompletedViewModel(author: "Pepe", style: "Rock", firstDisc: nil, secondDisc: "Pepe hits")
-        let mockViewModel3 = CompletedViewModel(author: "Pepe", style: "Rock", firstDisc: "Pepe canta", secondDisc: "Pepe hits")
-        let mockViewModel4 = CompletedViewModel(author: "Pepe", style: "Rock", firstDisc: nil, secondDisc: nil)
+        let discography3: [String] = ["disco1", "disco2", "disco3"]
+        let discography2: [String] = ["disco1", "disco2"]
+        let discography1: [String] = ["disco4"]
+        let mockViewModel1 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography2)
+        let mockViewModel2 = CompletedViewModel(author: "Pepe", style: "pop")
+        let mockViewModel3 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography3)
+        let mockViewModel4 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography1)
         viewModels.append(mockViewModel1)
         viewModels.append(mockViewModel2)
         viewModels.append(mockViewModel3)

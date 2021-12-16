@@ -27,8 +27,12 @@ class AuthorCell: UITableViewCell {
             addLabel(discografia)
             addLabel(firstDisk)
         }
-        if let secondDisk = viewModel.secondDisc {
+        if let secondDisk = viewModel.secondDisk{
             addLabel(secondDisk)
+        }
+        if viewModel.hasMoreThanTwo {
+            let extendedLabel = "..."
+            addLabel(extendedLabel)
         }
     }
     

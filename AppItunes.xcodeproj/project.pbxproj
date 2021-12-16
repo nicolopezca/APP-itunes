@@ -19,7 +19,6 @@
 		7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A7516276897F600E153FC /* AuthorCell.xib */; };
 		7F7A751C2768A81200E153FC /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A751B2768A81200E153FC /* HomeView.xib */; };
 		7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A751D2768A8C200E153FC /* HomeView.swift */; };
-		7F7A75212768B1F800E153FC /* AuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A75202768B1F800E153FC /* AuthorViewModel.swift */; };
 		7F7A7523276A166900E153FC /* CompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7522276A166900E153FC /* CompletedViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +58,6 @@
 		7F7A7516276897F600E153FC /* AuthorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorCell.xib; sourceTree = "<group>"; };
 		7F7A751B2768A81200E153FC /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 		7F7A751D2768A8C200E153FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		7F7A75202768B1F800E153FC /* AuthorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorViewModel.swift; sourceTree = "<group>"; };
 		7F7A7522276A166900E153FC /* CompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +170,6 @@
 		7F7A751F2768B1DB00E153FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7F7A75202768B1F800E153FC /* AuthorViewModel.swift */,
 				7F7A7522276A166900E153FC /* CompletedViewModel.swift */,
 			);
 			path = ViewModel;
@@ -313,7 +310,6 @@
 				7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */,
 				7F7A74E927688CA400E153FC /* ViewController.swift in Sources */,
 				7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */,
-				7F7A75212768B1F800E153FC /* AuthorViewModel.swift in Sources */,
 				7F7A7523276A166900E153FC /* CompletedViewModel.swift in Sources */,
 				7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */,
 				7F7A74E727688CA400E153FC /* SceneDelegate.swift in Sources */,
