@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct CompletedViewModel {
+struct ArtistViewModel {
     let author: String?
     let style: String?
     let discography: [String]?

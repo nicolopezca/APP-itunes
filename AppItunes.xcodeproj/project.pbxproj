@@ -19,7 +19,9 @@
 		7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A7516276897F600E153FC /* AuthorCell.xib */; };
 		7F7A751C2768A81200E153FC /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A751B2768A81200E153FC /* HomeView.xib */; };
 		7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A751D2768A8C200E153FC /* HomeView.swift */; };
-		7F7A7523276A166900E153FC /* CompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7522276A166900E153FC /* CompletedViewModel.swift */; };
+		7F7A7523276A166900E153FC /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7522276A166900E153FC /* ArtistViewModel.swift */; };
+		7F7A7526276B5EE400E153FC /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7525276B5EE400E153FC /* Artist.swift */; };
+		7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +60,9 @@
 		7F7A7516276897F600E153FC /* AuthorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorCell.xib; sourceTree = "<group>"; };
 		7F7A751B2768A81200E153FC /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 		7F7A751D2768A8C200E153FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		7F7A7522276A166900E153FC /* CompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewModel.swift; sourceTree = "<group>"; };
+		7F7A7522276A166900E153FC /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
+		7F7A7525276B5EE400E153FC /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesRespone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 		7F7A75192768A7C000E153FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7F7A7524276B5D6300E153FC /* Petition */,
 				7F7A7514276892CA00E153FC /* ViewComponents */,
 				7F7A751F2768B1DB00E153FC /* ViewModel */,
 				7F7A751A2768A7C800E153FC /* Views */,
@@ -170,9 +175,18 @@
 		7F7A751F2768B1DB00E153FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7F7A7522276A166900E153FC /* CompletedViewModel.swift */,
+				7F7A7522276A166900E153FC /* ArtistViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7F7A7524276B5D6300E153FC /* Petition */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A7525276B5EE400E153FC /* Artist.swift */,
+				7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */,
+			);
+			path = Petition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,8 +323,10 @@
 			files = (
 				7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */,
 				7F7A74E927688CA400E153FC /* ViewController.swift in Sources */,
+				7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */,
 				7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */,
-				7F7A7523276A166900E153FC /* CompletedViewModel.swift in Sources */,
+				7F7A7526276B5EE400E153FC /* Artist.swift in Sources */,
+				7F7A7523276A166900E153FC /* ArtistViewModel.swift in Sources */,
 				7F7A7517276897F600E153FC /* AuthorCell.swift in Sources */,
 				7F7A74E727688CA400E153FC /* SceneDelegate.swift in Sources */,
 			);

@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
-    private var viewModels: [CompletedViewModel] = []
+    private var viewModels: [ArtistViewModel] = []
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -21,7 +21,7 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(coder: aDecoder)
         commonInit()
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
@@ -39,7 +39,51 @@ private extension HomeView {
     func commonInit() {
         initSubView()
         configureTable()
-        createMockViewModels()
+        getItunesData { artists in
+            self.obtainArtists(artists)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func getItunesData(completion: @escaping ((([Artist]?) -> Void))) {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        let urlSession = URLSession(configuration: urlSessionConfiguration)
+        guard let url = URL(string: "https://itunes.apple.com/search?term=nirvana") else {
+            completion(nil)
+            return
+        }
+        urlSession.dataTask(with: url) { data, response, error in
+            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
+    }
+    
+    func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
+        guard let data = data,
+              let response = response as? HTTPURLResponse,
+              (200...299).contains(response.statusCode)
+        else {
+            completion(nil)
+            return
+        }
+        do {
+            let itunesResponse = try JSONDecoder().decode(ItunesReponse.self, from: data)
+            completion(itunesResponse.artists)
+            print(itunesResponse.artists)
+        } catch DecodingError.keyNotFound(let key, let context) {
+            print("could not find key \(key) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.valueNotFound(let type, let context) {
+            print("could not find type \(type) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.dataCorrupted(let context) {
+           print("data found to be corrupted in JSON: \(context.debugDescription)")
+            
+        } catch let error as NSError {NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")}
     }
     
     func initSubView() {
@@ -48,19 +92,16 @@ private extension HomeView {
         contentView.frame = self.bounds
     }
 
-    func createMockViewModels() {
-        let discography3: [String] = ["disco1", "disco2", "disco3"]
-        let discography2: [String] = ["disco1", "disco2"]
-        let discography1: [String] = ["disco4"]
-        let mockViewModel1 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography2)
-        let mockViewModel2 = CompletedViewModel(author: "Pepe", style: "pop")
-        let mockViewModel3 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography3)
-        let mockViewModel4 = CompletedViewModel(author: "Pepe", style: "rock", discography: discography1)
-        viewModels.append(mockViewModel1)
-        viewModels.append(mockViewModel2)
-        viewModels.append(mockViewModel3)
-        viewModels.append(mockViewModel4)
-        tableView.reloadData()
+    func obtainArtists(_ artists: [Artist]?) {
+        guard let artists = artists else {
+            return
+        }
+        artists.forEach { artist in
+            if let artistName = artist.artistName,
+               let primaryGenreName = artist.primaryGenreName {
+                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
+            }
+        }
     }
     
     func configureTable() {

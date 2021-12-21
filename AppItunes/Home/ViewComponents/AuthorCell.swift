@@ -15,7 +15,12 @@ class AuthorCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setViewModel(_ viewModel: CompletedViewModel) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.labelsStack.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func setViewModel(_ viewModel: ArtistViewModel) {
         if let author = viewModel.author {
             addLabel(author)
         }
