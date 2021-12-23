@@ -27,14 +27,14 @@ class AuthorCell: UITableViewCell {
         if let style = viewModel.style {
             addLabel(style)
         }
-        if let firstDisk = viewModel.firstDisc {
+        if let firstDisk = viewModel.discography {
             let discografia = "Discografia"
             addLabel(discografia)
             addLabel(firstDisk)
         }
-        if let secondDisk = viewModel.secondDisk{
-            addLabel(secondDisk)
-        }
+//        if let secondDisk = viewModel.secondDisk{
+//            addLabel(secondDisk)
+//        }
         if viewModel.hasMoreThanTwo {
             let extendedLabel = "..."
             addLabel(extendedLabel)

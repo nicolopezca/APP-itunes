@@ -50,7 +50,7 @@ private extension HomeView {
     func getItunesData(completion: @escaping ((([Artist]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: "https://itunes.apple.com/search?term=nirvana") else {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
             completion(nil)
             return
         }
@@ -99,7 +99,9 @@ private extension HomeView {
         artists.forEach { artist in
             if let artistName = artist.artistName,
                let primaryGenreName = artist.primaryGenreName {
+//               let discography = artist.collectionName {
                 self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
+//                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, discography: discography))
             }
         }
     }
