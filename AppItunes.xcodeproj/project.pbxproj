@@ -22,6 +22,9 @@
 		7F7A7523276A166900E153FC /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7522276A166900E153FC /* ArtistViewModel.swift */; };
 		7F7A7526276B5EE400E153FC /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7525276B5EE400E153FC /* Artist.swift */; };
 		7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */; };
+		7F7A752E2784460000E153FC /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A752C2784460000E153FC /* DetailCell.swift */; };
+		7F7A752F2784460000E153FC /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A752D2784460000E153FC /* DetailCell.xib */; };
+		7F7A7532278446F800E153FC /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A7531278446F800E153FC /* DetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		7F7A7522276A166900E153FC /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		7F7A7525276B5EE400E153FC /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesRespone.swift; sourceTree = "<group>"; };
+		7F7A752C2784460000E153FC /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		7F7A752D2784460000E153FC /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		7F7A7531278446F800E153FC /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 		7F7A74E327688CA400E153FC /* AppItunes */ = {
 			isa = PBXGroup;
 			children = (
+				7F7A75292784407700E153FC /* Detail */,
 				7F7A75192768A7C000E153FC /* Home */,
 				7F7A74E427688CA400E153FC /* AppDelegate.swift */,
 				7F7A74E627688CA400E153FC /* SceneDelegate.swift */,
@@ -187,6 +194,40 @@
 				7F7A7527276B5F1B00E153FC /* ItunesRespone.swift */,
 			);
 			path = Petition;
+			sourceTree = "<group>";
+		};
+		7F7A75292784407700E153FC /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A7530278446D400E153FC /* ViewModel */,
+				7F7A752B278440C200E153FC /* ViewComponents */,
+				7F7A752A278440BB00E153FC /* Views */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		7F7A752A278440BB00E153FC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F7A752B278440C200E153FC /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A752C2784460000E153FC /* DetailCell.swift */,
+				7F7A752D2784460000E153FC /* DetailCell.xib */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		7F7A7530278446D400E153FC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F7A7531278446F800E153FC /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +335,7 @@
 			files = (
 				7F7A74F127688CA600E153FC /* LaunchScreen.storyboard in Resources */,
 				7F7A74EE27688CA600E153FC /* Assets.xcassets in Resources */,
+				7F7A752F2784460000E153FC /* DetailCell.xib in Resources */,
 				7F7A751C2768A81200E153FC /* HomeView.xib in Resources */,
 				7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */,
 				7F7A74EC27688CA400E153FC /* Main.storyboard in Resources */,
@@ -323,6 +365,8 @@
 			files = (
 				7F7A751E2768A8C200E153FC /* HomeView.swift in Sources */,
 				7F7A74E927688CA400E153FC /* ViewController.swift in Sources */,
+				7F7A752E2784460000E153FC /* DetailCell.swift in Sources */,
+				7F7A7532278446F800E153FC /* DetailViewModel.swift in Sources */,
 				7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */,
 				7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */,
 				7F7A7526276B5EE400E153FC /* Artist.swift in Sources */,
