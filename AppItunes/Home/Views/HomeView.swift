@@ -39,7 +39,7 @@ private extension HomeView {
     func commonInit() {
         initSubView()
         configureTable()
-        getItunesData { artists in
+        getAuthorData { artists in
             self.obtainArtists(artists)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -47,17 +47,23 @@ private extension HomeView {
         }
     }
     
-    func getItunesData(completion: @escaping ((([Artist]?) -> Void))) {
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
-            completion(nil)
-            return
-        }
-        urlSession.dataTask(with: url) { data, response, error in
-            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
-        }.resume()
+    func initSubView() {
+        Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.frame = self.bounds
     }
+    
+        func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
+            let urlSessionConfiguration = URLSessionConfiguration.default
+            let urlSession = URLSession(configuration: urlSessionConfiguration)
+            guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
+                completion(nil)
+                return
+            }
+            urlSession.dataTask(with: url) { data, response, error in
+                self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
+            }.resume()
+        }
     
     func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
         guard let data = data,
@@ -81,35 +87,29 @@ private extension HomeView {
             print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
             
         } catch DecodingError.dataCorrupted(let context) {
-           print("data found to be corrupted in JSON: \(context.debugDescription)")
+            print("data found to be corrupted in JSON: \(context.debugDescription)")
             
         } catch let error as NSError {NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")}
     }
     
-    func initSubView() {
-        Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-    }
-
-    func obtainArtists(_ artists: [Artist]?) {
-        guard let artists = artists else {
-            return
-        }
-        artists.forEach { artist in
-            if let artistName = artist.artistName,
-               let primaryGenreName = artist.primaryGenreName {
-//               let discography = artist.collectionName {
-                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
-//                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, discography: discography))
+        func obtainArtists(_ artists: [Artist]?) {
+            guard let artists = artists else {
+                return
+            }
+            artists.forEach { artist in
+                if let artistName = artist.artistName,
+                   let primaryGenreName = artist.primaryGenreName {
+//                   let discography = artist.collectionName {
+                    self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
+//                    self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, discography: discography))
+                }
             }
         }
+        
+        func configureTable() {
+            let nib = UINib(nibName: AuthorCell.cellReuseIdentifier, bundle: nil)
+            tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
     }
-    
-    func configureTable() {
-        let nib = UINib(nibName: AuthorCell.cellReuseIdentifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-}
