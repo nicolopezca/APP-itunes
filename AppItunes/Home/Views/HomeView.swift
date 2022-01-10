@@ -9,6 +9,7 @@ import UIKit
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     private var viewModels: [ArtistViewModel] = []
+    weak var delegate: MyDelegate?
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -26,6 +27,12 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         return viewModels.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.cellTapped()
+
+    }
+   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as? AuthorCell else {
             return UITableViewCell()
@@ -33,6 +40,10 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.setViewModel(viewModels[indexPath.row])
         return cell
     }
+}
+
+protocol MyDelegate: class {
+    func cellTapped()
 }
 
 private extension HomeView {
