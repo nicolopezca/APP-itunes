@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct ArtistViewModel {
     let author: String?
     let style: String?
@@ -16,17 +17,7 @@ struct ArtistViewModel {
         self.style = style
         self.discography = discography
     }
-//    
-//    var firstDisc: String? {
-//        guard let discography = discography else { return nil }
-//        return discography[0]
-//    }
-//    
-//    var secondDisk: String? {
-//        guard let discography = discography, discography.count > 1 else { return nil }
-//        return discography[1]    
-//    }
-//    
+
     var hasMoreThanTwo: Bool {
         guard let discography = discography else { return false }
         return discography.count > 2

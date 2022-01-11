@@ -6,13 +6,13 @@
 //
 
 import Foundation
-struct DiscoResponse {
+
+struct DiscResponse {
     var discs: [Discography]
     var resultCount: Int
     
     enum CodingKeys: String, CodingKey {
         case resultCount = "resultCount"
         case discs = "results"
-    }
-    
+    }    
 }

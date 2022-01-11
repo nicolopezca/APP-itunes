@@ -30,7 +30,7 @@
 		7F7A753A2785B26000E153FC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A75382785B26000E153FC /* DetailViewController.swift */; };
 		7F7A753B2785B26000E153FC /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A75392785B26000E153FC /* DetailViewController.xib */; };
 		7F7A753E2785B4E100E153FC /* Discography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753D2785B4E100E153FC /* Discography.swift */; };
-		7F7A75402785B4EE00E153FC /* DiscoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753F2785B4EE00E153FC /* DiscoResponse.swift */; };
+		7F7A75402785B4EE00E153FC /* DiscResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753F2785B4EE00E153FC /* DiscResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +80,7 @@
 		7F7A75382785B26000E153FC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7F7A75392785B26000E153FC /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		7F7A753D2785B4E100E153FC /* Discography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discography.swift; sourceTree = "<group>"; };
-		7F7A753F2785B4EE00E153FC /* DiscoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoResponse.swift; sourceTree = "<group>"; };
+		7F7A753F2785B4EE00E153FC /* DiscResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				7F7A753D2785B4E100E153FC /* Discography.swift */,
-				7F7A753F2785B4EE00E153FC /* DiscoResponse.swift */,
+				7F7A753F2785B4EE00E153FC /* DiscResponse.swift */,
 			);
 			path = SecondPetition;
 			sourceTree = "<group>";
@@ -404,7 +404,7 @@
 				7F7A752E2784460000E153FC /* DetailCell.swift in Sources */,
 				7F7A753A2785B26000E153FC /* DetailViewController.swift in Sources */,
 				7F7A753E2785B4E100E153FC /* Discography.swift in Sources */,
-				7F7A75402785B4EE00E153FC /* DiscoResponse.swift in Sources */,
+				7F7A75402785B4EE00E153FC /* DiscResponse.swift in Sources */,
 				7F7A7532278446F800E153FC /* DetailViewModel.swift in Sources */,
 				7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */,
 				7F7A753427859FF600E153FC /* DetailView.swift in Sources */,

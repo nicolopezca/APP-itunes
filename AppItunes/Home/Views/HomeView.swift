@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol HomeViewDelegate: class {
+    func cellTapped()
+}
+
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     private var viewModels: [ArtistViewModel] = []
-    weak var delegate: MyDelegate?
+    weak var delegate: HomeViewDelegate?
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -29,9 +33,7 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.cellTapped()
-
     }
-   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as? AuthorCell else {
@@ -40,10 +42,6 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.setViewModel(viewModels[indexPath.row])
         return cell
     }
-}
-
-protocol MyDelegate: class {
-    func cellTapped()
 }
 
 private extension HomeView {
@@ -88,39 +86,31 @@ private extension HomeView {
             let itunesResponse = try JSONDecoder().decode(ItunesReponse.self, from: data)
             completion(itunesResponse.artists)
             print(itunesResponse.artists)
-        } catch DecodingError.keyNotFound(let key, let context) {
-            print("could not find key \(key) in JSON: \(context.debugDescription)")
-            
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
-            
         } catch DecodingError.typeMismatch(let type, let context) {
             print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
-            
-        } catch DecodingError.dataCorrupted(let context) {
-            print("data found to be corrupted in JSON: \(context.debugDescription)")
-            
-        } catch let error as NSError {NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")}
+        } catch let error as NSError {
+            NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
+        }
     }
     
-        func obtainArtists(_ artists: [Artist]?) {
-            guard let artists = artists else {
-                return
-            }
-            artists.forEach { artist in
-                if let artistName = artist.artistName,
-                   let primaryGenreName = artist.primaryGenreName {
-//                   let discography = artist.collectionName {
-                    self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
-//                    self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, discography: discography))
-                }
-            }
+    func obtainArtists(_ artists: [Artist]?) {
+        guard let artists = artists else {
+            return
         }
-        
-        func configureTable() {
-            let nib = UINib(nibName: AuthorCell.cellReuseIdentifier, bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
-            tableView.delegate = self
-            tableView.dataSource = self
+        artists.forEach { artist in
+            if let artistName = artist.artistName,
+               let primaryGenreName = artist.primaryGenreName {
+                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
+            }
         }
     }
+    
+    func configureTable() {
+        let nib = UINib(nibName: AuthorCell.cellReuseIdentifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: AuthorCell.cellReuseIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+}
