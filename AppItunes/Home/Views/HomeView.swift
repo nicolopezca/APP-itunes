@@ -64,17 +64,17 @@ private extension HomeView {
         contentView.frame = self.bounds
     }
     
-        func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
-            let urlSessionConfiguration = URLSessionConfiguration.default
-            let urlSession = URLSession(configuration: urlSessionConfiguration)
-            guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
-                completion(nil)
-                return
-            }
-            urlSession.dataTask(with: url) { data, response, error in
-                self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
-            }.resume()
+    func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        let urlSession = URLSession(configuration: urlSessionConfiguration)
+        guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
+            completion(nil)
+            return
         }
+        urlSession.dataTask(with: url) { data, response, error in
+            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
+    }
     
     func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
         guard let data = data,

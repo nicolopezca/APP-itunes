@@ -23,6 +23,45 @@ class DetailView: UIView, UITableViewDelegate, UITableViewDataSource {
         commonInit()
     }
     
+    func getDiscography(completion: @escaping ((([Artist]?) -> Void))) {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        let urlSession = URLSession(configuration: urlSessionConfiguration)
+        guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
+            completion(nil)
+            return
+        }
+        urlSession.dataTask(with: url) { data, response, error in
+            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
+    }
+    
+    func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
+        guard let data = data,
+              let response = response as? HTTPURLResponse,
+              (200...299).contains(response.statusCode)
+        else {
+            completion(nil)
+            return
+        }
+        do {
+            let itunesResponse = try JSONDecoder().decode(ItunesReponse.self, from: data)
+            completion(itunesResponse.artists)
+            print(itunesResponse.artists)
+        } catch DecodingError.keyNotFound(let key, let context) {
+            print("could not find key \(key) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.valueNotFound(let type, let context) {
+            print("could not find type \(type) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+            
+        } catch DecodingError.dataCorrupted(let context) {
+            print("data found to be corrupted in JSON: \(context.debugDescription)")
+            
+        } catch let error as NSError {NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")}
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
