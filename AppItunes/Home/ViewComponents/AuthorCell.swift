@@ -15,21 +15,24 @@ class AuthorCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setViewModel(_ viewModel: CompletedViewModel) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.labelsStack.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func setViewModel(_ viewModel: ArtistViewModel) {
         if let author = viewModel.author {
             addLabel(author)
         }
         if let style = viewModel.style {
             addLabel(style)
         }
-        if let firstDisk = viewModel.firstDisc {
+        if let firstDisk = viewModel.discography {
             let discografia = "Discografia"
             addLabel(discografia)
             addLabel(firstDisk)
         }
-        if let secondDisk = viewModel.secondDisk{
-            addLabel(secondDisk)
-        }
+
         if viewModel.hasMoreThanTwo {
             let extendedLabel = "..."
             addLabel(extendedLabel)
