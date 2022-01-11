@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct DetailViewModel {
     let thumbnail: String?
     let title: String?
