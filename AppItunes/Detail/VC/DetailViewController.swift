@@ -15,10 +15,10 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createDetailView()
+        addDetailView()
     }
     
-    func createDetailView() {
+    func addDetailView() {
         self.view.addSubview(detailView)
         detailView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         detailView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
