@@ -13,7 +13,7 @@ struct Discography: Decodable {
     let discNumber: Int?
     let primaryGenreName: String?
     let collectionName: String?
-    let releaseDate: Date?
+    let releaseDate: String?
     let artworkUrl100: URL?
     let country: String?
     

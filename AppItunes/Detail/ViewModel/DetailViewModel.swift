@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 struct DetailViewModel {
-    let thumbnail: String?
+    let thumbnail: URL?
     let title: String?
     let year: String?
 }

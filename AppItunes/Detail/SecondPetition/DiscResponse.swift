@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DiscResponse {
+struct DiscResponse: Decodable {
     var discs: [Discography]
     var resultCount: Int
     

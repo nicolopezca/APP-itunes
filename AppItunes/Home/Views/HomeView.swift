@@ -83,7 +83,7 @@ private extension HomeView {
             return
         }
         do {
-            let itunesResponse = try JSONDecoder().decode(ItunesReponse.self, from: data)
+            let itunesResponse = try JSONDecoder().decode(ItunesResponse.self, from: data)
             completion(itunesResponse.artists)
             print(itunesResponse.artists)
         } catch DecodingError.valueNotFound(let type, let context) {
