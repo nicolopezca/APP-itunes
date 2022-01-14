@@ -70,7 +70,11 @@ private extension DetailView {
             return
         }
         do {
-            let detailResponse = try JSONDecoder().decode(DiscResponse.self, from: data)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(formatter)
+            let detailResponse = try decoder.decode(DiscResponse.self, from: data)
             completion(detailResponse.discs)
             print(detailResponse.discs)
         } catch DecodingError.valueNotFound(let type, let context) {
@@ -87,16 +91,17 @@ private extension DetailView {
             return
         }
         discs.forEach { discs in
-            if let title = discs.collectionName,
-               let thumbnail = discs.artworkUrl100,
-               let year = discs.releaseDate {
-                self.viewModels.append(DetailViewModel(thumbnail: thumbnail, title: title, year: year))
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy"
+            if let releasedDate = discs.releaseDate {
+                if let title = discs.collectionName,
+                   let thumbnail = discs.artworkUrl100,
+                   let year: String? = formatter.string(from: releasedDate) {
+                    self.viewModels.append(DetailViewModel(thumbnail: thumbnail, title: title, year: year))
+                }
             }
+            
         }
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func initSubView() {

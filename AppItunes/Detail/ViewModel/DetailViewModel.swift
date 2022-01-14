@@ -11,5 +11,17 @@ import UIKit
 struct DetailViewModel {
     let thumbnail: URL?
     let title: String?
-    let year: String?
+    var year: String?
+    
 }
+
+
+
+extension Date {
+   func getFormattedDate(format: String) -> String {
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = format
+        return dateformat.string(from: self)
+    }
+}
+
