@@ -11,11 +11,13 @@ struct ArtistViewModel {
     let author: String?
     let style: String?
     let discography: String?
+    let id: Int?
 
-    init(author: String, style: String, discography: String? = nil) {
+    init(author: String, style: String, discography: String? = nil, id: Int?) {
         self.author = author
         self.style = style
         self.discography = discography
+        self.id = id
     }
 
     var hasMoreThanTwo: Bool {

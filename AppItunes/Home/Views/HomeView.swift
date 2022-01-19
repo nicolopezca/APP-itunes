@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeViewDelegate: class {
-    func cellTapped()
+    func cellTapped(id: Int, artistName: String)
 }
 
 class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -32,7 +32,10 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.cellTapped()
+        if let id = viewModels[indexPath.row].id,
+           let name = viewModels[indexPath.row].author {
+            self.delegate?.cellTapped(id: id, artistName: name)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,8 +104,9 @@ private extension HomeView {
         }
         artists.forEach { artist in
             if let artistName = artist.artistName,
+               let id = artist.artistId,
                let primaryGenreName = artist.primaryGenreName {
-                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName))
+                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, id: id))
             }
         }
     }

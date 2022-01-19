@@ -15,8 +15,6 @@ struct DetailViewModel {
     
 }
 
-
-
 extension Date {
    func getFormattedDate(format: String) -> String {
         let dateformat = DateFormatter()
@@ -24,4 +22,3 @@ extension Date {
         return dateformat.string(from: self)
     }
 }
-

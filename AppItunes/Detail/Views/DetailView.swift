@@ -13,6 +13,7 @@ class DetailView: UIView, UITableViewDelegate, UITableViewDataSource {
     private var viewModels: [DetailViewModel] = []
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    var artistId: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,13 +28,25 @@ class DetailView: UIView, UITableViewDelegate, UITableViewDataSource {
     func getDiscography(completion: @escaping ((([Discography]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: "https://itunes.apple.com/lookup?id=298496035&entity=album") else {
+        if let id = artistId {
+        guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&entity=album") else {
             completion(nil)
             return
         }
         urlSession.dataTask(with: url) { data, response, error in
             self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
         }.resume()
+    }
+    }
+    
+    func obtainId(id: Int) {
+        artistId = id
+        getDiscography { discs in
+            self.obtainDetailData(discs)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,12 +66,6 @@ private extension DetailView {
     func commonInit() {
         initSubView()
         configureTable()
-        getDiscography { discs in
-            self.obtainDetailData(discs)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     func handleDetailResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Discography]?) -> Void))) {
