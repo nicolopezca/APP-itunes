@@ -13,7 +13,7 @@ class DetailView: UIView, UITableViewDelegate, UITableViewDataSource {
     private var viewModels: [DetailViewModel] = []
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
-    var artistId: Int?
+    private var artistId: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,14 +29,14 @@ class DetailView: UIView, UITableViewDelegate, UITableViewDataSource {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
         if let id = artistId {
-        guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&entity=album") else {
-            completion(nil)
-            return
+            guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&entity=album") else {
+                completion(nil)
+                return
+            }
+            urlSession.dataTask(with: url) { data, response, error in
+                self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
+            }.resume()
         }
-        urlSession.dataTask(with: url) { data, response, error in
-            self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
-        }.resume()
-    }
     }
     
     func obtainId(id: Int) {
@@ -107,7 +107,6 @@ private extension DetailView {
                     self.viewModels.append(DetailViewModel(thumbnail: thumbnail, title: title, year: year))
                 }
             }
-            
         }
     }
     

@@ -23,7 +23,9 @@ class DetailViewController: UIViewController {
     
     func addDetailView() {
         self.view.addSubview(detailView)
-        detailView.obtainId(id: id!)
+        if let id = id {
+            detailView.obtainId(id: id)
+        }
         detailView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         detailView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         detailView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true

@@ -9,19 +9,6 @@ import UIKit
 
 extension UIImageView {
     static let imageCache = NSCache<AnyObject, AnyObject>()
-//    @discardableResult
-//    public func loadImage(url: URL, placeholder: UIImage? = nil, completion:(() -> Void)? = nil) -> URLSessionDataTask? {
-////        if let cacheImage = UIImageView.imageCache.object(forKey: url as AnyObject) as? UIImage {
-////            self.image = cacheImage
-////            DispatchQueue.main.async {
-////                completion?()
-////            }
-////            return nil
-////        }
-////        self.image = placeholder
-////
-////        return self.loadImage(url: url, completion: completion)
-//    }
     
     public func loadImageFromUrl(url: URL, completion:(() -> Void)? = nil ) -> URLSessionDataTask? {
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in

@@ -12,7 +12,6 @@ struct DetailViewModel {
     let thumbnail: URL?
     let title: String?
     var year: String?
-    
 }
 
 extension Date {
