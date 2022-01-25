@@ -17,10 +17,9 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: HomeViewDelegate {
-    func cellTapped(id: Int, artistName: String) {
+    func cellTapped(artist: Artist) {
         let nextViewController = DetailViewController()
-        nextViewController.id = id
-        nextViewController.titleArtist = artistName
+        nextViewController.artist = artist
         navigationController?.pushViewController(nextViewController,
                                                  animated: false)
     }

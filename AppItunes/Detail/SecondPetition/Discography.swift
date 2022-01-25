@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Discography: Decodable {
     let artistId: Int?
     let artistName: String?
@@ -14,8 +15,9 @@ struct Discography: Decodable {
     let primaryGenreName: String?
     let collectionName: String?
     let releaseDate: Date?
-    let artworkUrl100: URL?
+    let thumbnail: URL?
     let country: String?
+    let wrapperType: String?
     
     enum CodingKeys: String, CodingKey {
         case artistId = "artistId"
@@ -25,8 +27,9 @@ struct Discography: Decodable {
         case primaryGenreName = "primaryGenreName"
         case collectionName = "collectionName"
         case releaseDate = "releaseDate"
-        case artworkUrl100 = "artworkUrl100"
+        case thumbnail = "artworkUrl100"
         case country = "country"
+        case wrapperType = "wrapperType"
     }
 }
 

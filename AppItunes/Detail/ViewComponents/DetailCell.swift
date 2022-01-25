@@ -20,7 +20,10 @@ class DetailCell: UITableViewCell {
     func setViewModel(_ viewModel: DetailViewModel) {
         titleLabel.text = viewModel.title
         yearLabel.text = viewModel.year
-        self.albumImage?.loadImageFromUrl(url: viewModel.thumbnail!, completion: nil)
+        guard let thumbnail = viewModel.thumbnail else {
+            return
+        }
+        albumImage?.loadImageFromUrl(url: thumbnail)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

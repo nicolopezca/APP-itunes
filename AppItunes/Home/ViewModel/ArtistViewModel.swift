@@ -8,20 +8,30 @@
 import Foundation
 
 struct ArtistViewModel {
-    let author: String?
-    let style: String?
-    let discography: String?
-    let id: Int?
-
-    init(author: String, style: String, discography: String? = nil, id: Int?) {
-        self.author = author
-        self.style = style
-        self.discography = discography
-        self.id = id
+    let artist: Artist
+    
+    init(artist: Artist) {
+        self.artist = artist
     }
-
+    
+    var author: String {
+        return artist.artistName ?? ""
+    }
+    
+    var id: Int {
+        return artist.artistId ?? 0
+    }
+    
+    var style: String {
+        return artist.primaryGenreName ?? ""
+    }
+    
+    var discography: String {
+        return artist.collectionName ?? ""
+    }
+    
     var hasMoreThanTwo: Bool {
-        guard let discography = discography else { return false }
+        guard let discography = artist.collectionName else { return false }
         return discography.count > 2
     }
 }

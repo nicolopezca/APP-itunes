@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol HomeViewDelegate: class {
-    func cellTapped(id: Int, artistName: String)
+protocol HomeViewDelegate: AnyObject {
+    func cellTapped(artist: Artist)
 }
 
-class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
-    private var viewModels: [ArtistViewModel] = []
-    weak var delegate: HomeViewDelegate?
+class HomeView: UIView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    private var viewModels: [ArtistViewModel] = []
+    weak var delegate: HomeViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,25 +25,6 @@ class HomeView: UIView, UITableViewDelegate, UITableViewDataSource {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let id = viewModels[indexPath.row].id,
-           let name = viewModels[indexPath.row].author {
-            self.delegate?.cellTapped(id: id, artistName: name)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as? AuthorCell else {
-            return UITableViewCell()
-        }
-        cell.setViewModel(viewModels[indexPath.row])
-        return cell
     }
 }
 
@@ -78,21 +59,15 @@ private extension HomeView {
     }
     
     func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
-        guard let data = data,
-              let response = response as? HTTPURLResponse,
-              (200...299).contains(response.statusCode)
-        else {
+        guard let data =  checkData(data: data, response: response) else {
             completion(nil)
             return
         }
         do {
             let itunesResponse = try JSONDecoder().decode(ItunesResponse.self, from: data)
             completion(itunesResponse.artists)
-            print(itunesResponse.artists)
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
-        } catch DecodingError.typeMismatch(let type, let context) {
-            print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
         } catch let error as NSError {
             NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
         }
@@ -103,11 +78,7 @@ private extension HomeView {
             return
         }
         artists.forEach { artist in
-            if let artistName = artist.artistName,
-               let id = artist.artistId,
-               let primaryGenreName = artist.primaryGenreName {
-                self.viewModels.append(ArtistViewModel(author: artistName, style: primaryGenreName, id: id))
-            }
+            self.viewModels.append(ArtistViewModel(artist: artist))
         }
     }
     
@@ -117,4 +88,36 @@ private extension HomeView {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    func checkData(data: Data?, response: URLResponse?) -> Data? {
+        guard let data = data,
+              let response = response as? HTTPURLResponse,
+              (200...299).contains(response.statusCode)
+        else {
+            return nil
+        }
+        return data
+    }
 }
+
+extension HomeView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.cellTapped(artist: viewModels[(indexPath).row].artist)
+    }
+}
+
+extension HomeView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: AuthorCell = self.tableView.dequeueReusableCell(withIdentifier: AuthorCell.cellReuseIdentifier) as? AuthorCell else {
+            return UITableViewCell()
+        }
+        cell.setViewModel(viewModels[indexPath.row])
+        return cell
+    }
+}
+
+
