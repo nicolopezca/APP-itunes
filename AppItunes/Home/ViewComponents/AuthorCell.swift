@@ -9,7 +9,7 @@ import UIKit
 
 class AuthorCell: UITableViewCell {
     @IBOutlet private weak var labelsStack: UIStackView!
-    static let cellReuseIdentifier = "AuthorCell"
+    static let cellReuseIdentifier = String(describing: AuthorCell.self)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,21 +21,12 @@ class AuthorCell: UITableViewCell {
     }
     
     func setViewModel(_ viewModel: ArtistViewModel) {
-        if let author = viewModel.artist.artistName {
-            addLabel(author)
-        }
-        if let style = viewModel.artist.primaryGenreName {
-            addLabel(style)
-        }
-        if let firstDisk = viewModel.artist.collectionName {
-            let discografia = "Discografia"
-            addLabel(discografia)
-            addLabel(firstDisk)
-        }
-        
-        if viewModel.hasMoreThanTwo {
-            let extendedLabel = "..."
-            addLabel(extendedLabel)
+        addLabel(viewModel.author)
+        addLabel(viewModel.style)
+        addLabel(NSLocalizedString("Discography", comment: ""))
+        addLabel(viewModel.discography)
+        if viewModel.hasMoreThanTwoDiscs {
+            addLabel(NSLocalizedString("Extended", comment: ""))
         }
     }
     

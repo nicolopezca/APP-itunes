@@ -9,23 +9,23 @@ import Foundation
 import UIKit
 
 struct DetailViewModel {
-    let discographies: Discography
+    let discography: Discography
     
     init(discographies: Discography) {
-        self.discographies = discographies
+        self.discography = discographies
     }
     
     var title: String {
-        return discographies.collectionName ?? discographies.artistName!
+        return discography.collectionName ?? ""
     }
     
     var thumbnail: URL? {
-        return discographies.thumbnail ?? URL(string: "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg")
+        return discography.thumbnail ?? URL(string: "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg")
     }
     
     var year: String? {
-        guard let year = discographies.releaseDate else {
-            return "Date"
+        guard let year = discography.releaseDate else {
+            return nil
         }
         return year.getFormattedDate(format: "yyyy")
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F1C1EF92791932A00ECAD19 /* Ext+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C1EF82791932A00ECAD19 /* Ext+UIImageView.swift */; };
+		7F1C1EFC27A15A2B00ECAD19 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F1C1EFE27A15A2B00ECAD19 /* Localizable.strings */; };
 		7F7A74E527688CA400E153FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A74E427688CA400E153FC /* AppDelegate.swift */; };
 		7F7A74E727688CA400E153FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A74E627688CA400E153FC /* SceneDelegate.swift */; };
 		7F7A74E927688CA400E153FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A74E827688CA400E153FC /* ViewController.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		7F1C1EF82791932A00ECAD19 /* Ext+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIImageView.swift"; sourceTree = "<group>"; };
+		7F1C1EFD27A15A2B00ECAD19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F7A74E127688CA400E153FC /* AppItunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppItunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7A74E427688CA400E153FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F7A74E627688CA400E153FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				7F7A74ED27688CA600E153FC /* Assets.xcassets */,
 				7F7A74EF27688CA600E153FC /* LaunchScreen.storyboard */,
 				7F7A74F227688CA600E153FC /* Info.plist */,
+				7F1C1EFE27A15A2B00ECAD19 /* Localizable.strings */,
 			);
 			path = AppItunes;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				7F7A74EE27688CA600E153FC /* Assets.xcassets in Resources */,
 				7F7A752F2784460000E153FC /* DetailCell.xib in Resources */,
 				7F7A753B2785B26000E153FC /* DetailViewController.xib in Resources */,
+				7F1C1EFC27A15A2B00ECAD19 /* Localizable.strings in Resources */,
 				7F7A751C2768A81200E153FC /* HomeView.xib in Resources */,
 				7F7A7518276897F600E153FC /* AuthorCell.xib in Resources */,
 				7F7A74EC27688CA400E153FC /* Main.storyboard in Resources */,
@@ -452,6 +456,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7F1C1EFE27A15A2B00ECAD19 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F1C1EFD27A15A2B00ECAD19 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7F7A74EA27688CA400E153FC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

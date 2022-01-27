@@ -30,7 +30,7 @@ struct ArtistViewModel {
         return artist.collectionName ?? ""
     }
     
-    var hasMoreThanTwo: Bool {
+    var hasMoreThanTwoDiscs: Bool {
         guard let discography = artist.collectionName else { return false }
         return discography.count > 2
     }

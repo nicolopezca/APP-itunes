@@ -59,7 +59,7 @@ private extension HomeView {
     }
     
     func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
-        guard let data =  checkData(data: data, response: response) else {
+        guard let data =  getData(data: data, response: response) else {
             completion(nil)
             return
         }
@@ -77,9 +77,7 @@ private extension HomeView {
         guard let artists = artists else {
             return
         }
-        artists.forEach { artist in
-            self.viewModels.append(ArtistViewModel(artist: artist))
-        }
+        self.viewModels = artists.map { ArtistViewModel(artist: $0) }
     }
     
     func configureTable() {
@@ -89,7 +87,7 @@ private extension HomeView {
         tableView.dataSource = self
     }
     
-    func checkData(data: Data?, response: URLResponse?) -> Data? {
+    func getData(data: Data?, response: URLResponse?) -> Data? {
         guard let data = data,
               let response = response as? HTTPURLResponse,
               (200...299).contains(response.statusCode)

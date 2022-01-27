@@ -11,7 +11,6 @@ class DetailView: UIView {
     
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
-    private var artistId: Int?
     private var viewModels: [DetailViewModel] = []
     
     override init(frame: CGRect) {
@@ -25,8 +24,7 @@ class DetailView: UIView {
     }
     
     func getDiscographyFromId(_ id: Int) {
-        artistId = id
-        getDiscography { discs in
+        getDiscography(id: id) { discs in
             self.obtainDetailData(discs)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -42,18 +40,13 @@ private extension DetailView {
     }
     
     func handleDetailResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Discography]?) -> Void))) {
-        guard let data = checkData(data: data, response: response) else {
+        guard let data = getData(data: data, response: response) else {
             completion(nil)
             return
         }
         do {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(formatter)
-            let detailResponse = try decoder.decode(DiscResponse.self, from: data)
+            let detailResponse = try prepareDecoder().decode(DiscResponse.self, from: data)
             completion(detailResponse.discs)
-            
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
         } catch let error as NSError {
@@ -61,10 +54,10 @@ private extension DetailView {
         }
     }
     
-    func getDiscography(completion: @escaping ((([Discography]?) -> Void))) {
+    func getDiscography(id: Int, completion: @escaping ((([Discography]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        if let id = artistId {
+        let id = id
             guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&entity=album") else {
                 completion(nil)
                 return
@@ -72,8 +65,6 @@ private extension DetailView {
             urlSession.dataTask(with: url) { data, response, error in
                 self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
             }.resume()
-        }
-        return
     }
     
     func obtainDetailData(_ discs: [Discography]?) {
@@ -81,11 +72,9 @@ private extension DetailView {
             return
         }
         // TODO: - review wrapperType
-        discs.forEach { discs in
-            if discs.wrapperType == "collection" {
-                self.viewModels.append(DetailViewModel(discographies: discs))
-            }
-        }
+        self.viewModels = discs
+            .filter { $0.wrapperType == "collection" }
+            .map { DetailViewModel(discographies: $0) }
     }
     
     func initSubView() {
@@ -101,7 +90,7 @@ private extension DetailView {
         tableView.dataSource = self
     }
     
-    func checkData(data: Data?, response: URLResponse?) -> Data? {
+    func getData(data: Data?, response: URLResponse?) -> Data? {
         guard let data = data,
               let response = response as? HTTPURLResponse,
               (200...299).contains(response.statusCode)
@@ -109,6 +98,14 @@ private extension DetailView {
             return nil
         }
         return data
+    }
+    
+    func prepareDecoder() -> JSONDecoder {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        return decoder
     }
 }
 
