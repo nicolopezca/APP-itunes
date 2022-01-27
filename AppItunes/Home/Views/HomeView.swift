@@ -49,7 +49,7 @@ private extension HomeView {
     func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm") else {
+        guard let url = URL(string: Constants.searchURL) else {
             completion(nil)
             return
         }
@@ -66,6 +66,7 @@ private extension HomeView {
         do {
             let itunesResponse = try JSONDecoder().decode(ItunesResponse.self, from: data)
             completion(itunesResponse.artists)
+            print(itunesResponse.artists)
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
         } catch let error as NSError {
@@ -95,6 +96,10 @@ private extension HomeView {
             return nil
         }
         return data
+    }
+    
+    private enum Constants {
+        static let searchURL = "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm"
     }
 }
 

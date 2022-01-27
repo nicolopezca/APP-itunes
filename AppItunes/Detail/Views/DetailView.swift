@@ -45,7 +45,7 @@ private extension DetailView {
             return
         }
         do {
-            let detailResponse = try prepareDecoder().decode(DiscResponse.self, from: data)
+            let detailResponse = try getDecoder().decode(DiscResponse.self, from: data)
             completion(detailResponse.discs)
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
@@ -54,17 +54,18 @@ private extension DetailView {
         }
     }
     
-    func getDiscography(id: Int, completion: @escaping ((([Discography]?) -> Void))) {
+    func getDiscography(id: Int?, completion: @escaping ((([Discography]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        let id = id
-            guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&entity=album") else {
-                completion(nil)
-                return
-            }
-            urlSession.dataTask(with: url) { data, response, error in
-                self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
-            }.resume()
+        guard let id = id else {return}
+        let searchURL = Constants.preSearchURL + String(id) + Constants.postSearchURL
+        guard let url = URL(string: searchURL) else {
+            completion(nil)
+            return
+        }
+        urlSession.dataTask(with: url) { data, response, error in
+            self.handleDetailResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
     }
     
     func obtainDetailData(_ discs: [Discography]?) {
@@ -73,8 +74,8 @@ private extension DetailView {
         }
         // TODO: - review wrapperType
         self.viewModels = discs
-            .filter { $0.wrapperType == "collection" }
-            .map { DetailViewModel(discographies: $0) }
+            .filter { $0.wrapperType == Constants.collection }
+            .map { DetailViewModel(discography: $0) }
     }
     
     func initSubView() {
@@ -100,12 +101,18 @@ private extension DetailView {
         return data
     }
     
-    func prepareDecoder() -> JSONDecoder {
+    func getDecoder() -> JSONDecoder {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.dateFormat = TimeFormat.yyyyMMdd_T_HHmmssZ.rawValue
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         return decoder
+    }
+    
+    private enum Constants {
+        static let preSearchURL = "https://itunes.apple.com/lookup?id="
+        static let postSearchURL = "&entity=album"
+        static let collection = "collection"
     }
 }
 

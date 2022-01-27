@@ -11,8 +11,8 @@ import UIKit
 struct DetailViewModel {
     let discography: Discography
     
-    init(discographies: Discography) {
-        self.discography = discographies
+    init(discography: Discography) {
+        self.discography = discography
     }
     
     var title: String {
@@ -20,7 +20,7 @@ struct DetailViewModel {
     }
     
     var thumbnail: URL? {
-        return discography.thumbnail ?? URL(string: "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg")
+        return discography.thumbnail ?? URL(string: Constants.defaultImageURL)
     }
     
     var year: String? {
@@ -29,6 +29,10 @@ struct DetailViewModel {
         }
         return year.getFormattedDate(format: "yyyy")
     }
+    
+    private enum Constants {
+                 static let defaultImageURL = "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg"
+           }
 }
 
 extension Date {
