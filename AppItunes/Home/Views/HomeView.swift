@@ -14,6 +14,9 @@ protocol HomeViewDelegate: AnyObject {
 class HomeView: UIView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    private enum Constants {
+        static let searchURL = "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm"
+    }
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
     
@@ -66,7 +69,6 @@ private extension HomeView {
         do {
             let itunesResponse = try JSONDecoder().decode(ItunesResponse.self, from: data)
             completion(itunesResponse.artists)
-            print(itunesResponse.artists)
         } catch DecodingError.valueNotFound(let type, let context) {
             print("could not find type \(type) in JSON: \(context.debugDescription)")
         } catch let error as NSError {
@@ -96,10 +98,6 @@ private extension HomeView {
             return nil
         }
         return data
-    }
-    
-    private enum Constants {
-        static let searchURL = "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm"
     }
 }
 

@@ -8,9 +8,13 @@
 import UIKit
 
 class DetailView: UIView {
-    
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    private enum Constants {
+        static let preSearchURL = "https://itunes.apple.com/lookup?id="
+        static let postSearchURL = "&entity=album"
+        static let collection = "collection"
+    }
     private var viewModels: [DetailViewModel] = []
     
     override init(frame: CGRect) {
@@ -54,10 +58,9 @@ private extension DetailView {
         }
     }
     
-    func getDiscography(id: Int?, completion: @escaping ((([Discography]?) -> Void))) {
+    func getDiscography(id: Int, completion: @escaping ((([Discography]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let id = id else {return}
         let searchURL = Constants.preSearchURL + String(id) + Constants.postSearchURL
         guard let url = URL(string: searchURL) else {
             completion(nil)
@@ -107,12 +110,6 @@ private extension DetailView {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         return decoder
-    }
-    
-    private enum Constants {
-        static let preSearchURL = "https://itunes.apple.com/lookup?id="
-        static let postSearchURL = "&entity=album"
-        static let collection = "collection"
     }
 }
 

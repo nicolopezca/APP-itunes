@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 struct DetailViewModel {
+    private enum Constants {
+        static let defaultImageURL = "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg"
+    }
     let discography: Discography
     
     init(discography: Discography) {
@@ -29,10 +32,6 @@ struct DetailViewModel {
         }
         return year.getFormattedDate(format: "yyyy")
     }
-    
-    private enum Constants {
-                 static let defaultImageURL = "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg"
-           }
 }
 
 extension Date {
