@@ -8,6 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    var artist: Artist?
     private lazy var detailView: DetailView = {
         let view = DetailView(frame: self.view.frame)
         return view
@@ -16,6 +17,18 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addDetailView()
+        setTitle()
+        getDiscography()
+    }
+}
+private extension DetailViewController {
+    func setTitle() {
+        self.title = artist?.artistName
+    }
+    
+    func getDiscography() {
+        guard let id = artist?.artistId else { return }
+        detailView.getDiscographyFromId(id)
     }
     
     func addDetailView() {

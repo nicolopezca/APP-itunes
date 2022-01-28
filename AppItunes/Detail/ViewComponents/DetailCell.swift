@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailCell: UITableViewCell {
-    static let cellReuseIdentifier = "DetailCell"
+    static let cellReuseIdentifier = String(describing: DetailCell.self)
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -20,10 +20,12 @@ class DetailCell: UITableViewCell {
     func setViewModel(_ viewModel: DetailViewModel) {
         titleLabel.text = viewModel.title
         yearLabel.text = viewModel.year
+        if let thumbnail = viewModel.thumbnail  {
+            albumImage?.loadImageFromUrl(url: thumbnail)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

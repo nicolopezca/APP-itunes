@@ -6,9 +6,38 @@
 //
 
 import Foundation
+import UIKit
 
 struct DetailViewModel {
-    let thumbnail: String?
-    let title: String?
-    let year: String?
+    private enum Constants {
+        static let defaultImageURL = "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg"
+    }
+    let discography: Discography
+    
+    init(discography: Discography) {
+        self.discography = discography
+    }
+    
+    var title: String {
+        return discography.collectionName ?? ""
+    }
+    
+    var thumbnail: URL? {
+        return discography.thumbnail ?? URL(string: Constants.defaultImageURL)
+    }
+    
+    var year: String? {
+        guard let year = discography.releaseDate else {
+            return nil
+        }
+        return year.getFormattedDate(format: "yyyy")
+    }
+}
+
+extension Date {
+    func getFormattedDate(format: String) -> String {
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = format
+        return dateformat.string(from: self)
+    }
 }

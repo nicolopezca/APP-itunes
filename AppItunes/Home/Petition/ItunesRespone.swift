@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItunesReponse: Decodable {
+struct ItunesResponse: Decodable {
     var artists: [Artist]
     var resultCount: Int
     
