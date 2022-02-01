@@ -14,8 +14,10 @@ protocol HomeViewDelegate: AnyObject {
 class HomeView: UIView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     private enum Constants {
-        static let searchURL = "https://itunes.apple.com/search?term=avicii&entity=allArtist&attribute=allArtistTerm"
+        static let preSearchURL = "https://itunes.apple.com/search?term="
+        static let postSearchURL = "&entity=allArtist&attribute=allArtistTerm"
     }
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
@@ -35,12 +37,7 @@ private extension HomeView {
     func commonInit() {
         initSubView()
         configureTable()
-        getAuthorData { artists in
-            self.obtainArtists(artists)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
+        configureSearchBar()
     }
     
     func initSubView() {
@@ -49,10 +46,11 @@ private extension HomeView {
         contentView.frame = self.bounds
     }
     
-    func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
+    func getAuthorData(searchTerm: String, completion: @escaping ((([Artist]?) -> Void))) {
+        let searchURL = Constants.preSearchURL + searchTerm + Constants.postSearchURL
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: Constants.searchURL) else {
+        guard let url = URL(string: searchURL) else {
             completion(nil)
             return
         }
@@ -90,6 +88,10 @@ private extension HomeView {
         tableView.dataSource = self
     }
     
+    func configureSearchBar() {
+        searchBar.delegate = self
+    }
+    
     func getData(data: Data?, response: URLResponse?) -> Data? {
         guard let data = data,
               let response = response as? HTTPURLResponse,
@@ -104,6 +106,7 @@ private extension HomeView {
 extension HomeView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.cellTapped(artist: viewModels[(indexPath).row].artist)
+        self.searchBar.searchTextField.endEditing(true)
     }
 }
 
@@ -120,5 +123,21 @@ extension HomeView: UITableViewDataSource {
         return cell
     }
 }
-
-
+extension HomeView: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        callWithUserText()
+        searchBar.resignFirstResponder()
+    }
+    
+    func callWithUserText() {
+        guard let searchedText = searchBar.text else { return }
+        let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
+        getAuthorData(searchTerm: cleanSearch) { artists in
+            self.obtainArtists(artists)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+}
