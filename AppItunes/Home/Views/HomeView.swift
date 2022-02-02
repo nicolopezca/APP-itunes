@@ -18,6 +18,8 @@ class HomeView: UIView {
     private enum Constants {
         static let preSearchURL = "https://itunes.apple.com/search?term="
         static let postSearchURL = "&entity=allArtist&attribute=allArtistTerm"
+        static let artistPreSearchURL = "https://itunes.apple.com/lookup?id="
+        static let artistPostSearchURL = "&entity=album"
     }
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
@@ -48,6 +50,19 @@ private extension HomeView {
     
     func getAuthorData(searchTerm: String, completion: @escaping ((([Artist]?) -> Void))) {
         let searchURL = Constants.preSearchURL + searchTerm + Constants.postSearchURL
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        let urlSession = URLSession(configuration: urlSessionConfiguration)
+        guard let url = URL(string: searchURL) else {
+            completion(nil)
+            return
+        }
+        urlSession.dataTask(with: url) { data, response, error in
+            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
+    }
+    
+    func getAuthorDisk(searchTerm: String, completion: @escaping ((([Artist]?) -> Void))) {
+        let searchURL = Constants.preSearchURL + searchTerm + Constants.artistPostSearchURL
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
         guard let url = URL(string: searchURL) else {
@@ -126,17 +141,19 @@ extension HomeView: UITableViewDataSource {
 extension HomeView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        callWithUserText()
+        guard let searchText = searchBar.text else { return }
+        callWithUserText(searchedText: searchText)
         searchBar.resignFirstResponder()
     }
     
-    func callWithUserText() {
-        guard let searchedText = searchBar.text else { return }
+    func callWithUserText(searchedText: String) {
         let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
         getAuthorData(searchTerm: cleanSearch) { artists in
-            self.obtainArtists(artists)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            self.getAuthorDisk(searchTerm: cleanSearch) { artists in
+                self.obtainArtists(artists)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
