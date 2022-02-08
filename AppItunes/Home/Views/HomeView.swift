@@ -23,6 +23,7 @@ class HomeView: UIView {
     }
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
+    var id: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,8 +62,8 @@ private extension HomeView {
         }.resume()
     }
     
-    func getAuthorDisk(searchTerm: String, completion: @escaping ((([Artist]?) -> Void))) {
-        let searchURL = Constants.preSearchURL + searchTerm + Constants.artistPostSearchURL
+    func getAuthorDisk(id: Int, completion: @escaping ((([Artist]?) -> Void))) {
+        let searchURL = Constants.preSearchURL + String(id) + Constants.artistPostSearchURL
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
         guard let url = URL(string: searchURL) else {
@@ -93,7 +94,19 @@ private extension HomeView {
         guard let artists = artists else {
             return
         }
+        // TODO: - review obtain ID
+        //        artists.forEach { artist in
+        //            if let artistId = artist.artistId {
+        //                getDiscographyFromId(artistId)
         self.viewModels = artists.map { ArtistViewModel(artist: $0) }
+        //            }
+        //        }
+    }
+    
+    func obtainArtistsDisc(_ artists: [Artist]?)  {
+        guard let artists = artists else {
+            return
+        }
     }
     
     func configureTable() {
@@ -135,26 +148,35 @@ extension HomeView: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.setViewModel(viewModels[indexPath.row])
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
+    
+    func callWithUserText(searchedText: String) {
+        let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
+        getAuthorData(searchTerm: cleanSearch) { artists in
+            self.obtainArtists(artists)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func getDiscographyFromId(_ id: Int) {
+        getAuthorDisk(id: id) { artists in
+            self.obtainArtistsDisc(artists)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
+
 extension HomeView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
         callWithUserText(searchedText: searchText)
         searchBar.resignFirstResponder()
-    }
-    
-    func callWithUserText(searchedText: String) {
-        let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
-        getAuthorData(searchTerm: cleanSearch) { artists in
-            self.getAuthorDisk(searchTerm: cleanSearch) { artists in
-                self.obtainArtists(artists)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
     }
 }

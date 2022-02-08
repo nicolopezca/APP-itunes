@@ -32,7 +32,7 @@
 		7F7A75362785A01100E153FC /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A75352785A01100E153FC /* DetailView.xib */; };
 		7F7A753A2785B26000E153FC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A75382785B26000E153FC /* DetailViewController.swift */; };
 		7F7A753B2785B26000E153FC /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F7A75392785B26000E153FC /* DetailViewController.xib */; };
-		7F7A753E2785B4E100E153FC /* Discography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753D2785B4E100E153FC /* Discography.swift */; };
+		7F7A753E2785B4E100E153FC /* Disc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753D2785B4E100E153FC /* Disc.swift */; };
 		7F7A75402785B4EE00E153FC /* DiscResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7A753F2785B4EE00E153FC /* DiscResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +85,7 @@
 		7F7A75352785A01100E153FC /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		7F7A75382785B26000E153FC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7F7A75392785B26000E153FC /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
-		7F7A753D2785B4E100E153FC /* Discography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discography.swift; sourceTree = "<group>"; };
+		7F7A753D2785B4E100E153FC /* Disc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disc.swift; sourceTree = "<group>"; };
 		7F7A753F2785B4EE00E153FC /* DiscResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,8 +194,8 @@
 		7F7A751A2768A7C800E153FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7F7A751B2768A81200E153FC /* HomeView.xib */,
 				7F7A751D2768A8C200E153FC /* HomeView.swift */,
+				7F7A751B2768A81200E153FC /* HomeView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 		7F7A753C2785B4C100E153FC /* SecondPetition */ = {
 			isa = PBXGroup;
 			children = (
-				7F7A753D2785B4E100E153FC /* Discography.swift */,
+				7F7A753D2785B4E100E153FC /* Disc.swift */,
 				7F7A753F2785B4EE00E153FC /* DiscResponse.swift */,
 			);
 			path = SecondPetition;
@@ -415,7 +415,7 @@
 				7F1C1F0027A2A79A00ECAD19 /* TimeFormat.swift in Sources */,
 				7F7A752E2784460000E153FC /* DetailCell.swift in Sources */,
 				7F7A753A2785B26000E153FC /* DetailViewController.swift in Sources */,
-				7F7A753E2785B4E100E153FC /* Discography.swift in Sources */,
+				7F7A753E2785B4E100E153FC /* Disc.swift in Sources */,
 				7F7A75402785B4EE00E153FC /* DiscResponse.swift in Sources */,
 				7F7A7532278446F800E153FC /* DetailViewModel.swift in Sources */,
 				7F7A7528276B5F1B00E153FC /* ItunesRespone.swift in Sources */,

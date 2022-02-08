@@ -43,7 +43,7 @@ private extension DetailView {
         configureTable()
     }
     
-    func handleDetailResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Discography]?) -> Void))) {
+    func handleDetailResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Disc]?) -> Void))) {
         guard let data = getData(data: data, response: response) else {
             completion(nil)
             return
@@ -58,7 +58,7 @@ private extension DetailView {
         }
     }
     
-    func getDiscography(id: Int, completion: @escaping ((([Discography]?) -> Void))) {
+    func getDiscography(id: Int, completion: @escaping ((([Disc]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
         let urlSession = URLSession(configuration: urlSessionConfiguration)
         let searchURL = Constants.preSearchURL + String(id) + Constants.postSearchURL
@@ -71,7 +71,7 @@ private extension DetailView {
         }.resume()
     }
     
-    func obtainDetailData(_ discs: [Discography]?) {
+    func obtainDetailData(_ discs: [Disc]?) {
         guard let discs = discs else {
             return
         }

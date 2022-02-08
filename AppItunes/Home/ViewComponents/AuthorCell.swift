@@ -21,19 +21,38 @@ class AuthorCell: UITableViewCell {
     }
     
     func setViewModel(_ viewModel: ArtistViewModel) {
-        addLabel(viewModel.author)
-        addLabel(viewModel.style)
-        addLabel(NSLocalizedString("Discography", comment: ""))
-        addLabel(viewModel.discography)
-        if viewModel.hasMoreThanTwoDiscs {
-            addLabel(NSLocalizedString("Extended", comment: ""))
-        }
+        addBoldLabel(viewModel.author)
+        addItalicLabel(viewModel.style)
+        addBoldLabel(NSLocalizedString("Discography", comment: ""))
+        // TODO: - review discs labels
+        addLabel(viewModel.disc)
+        //            addLabel(viewModel.disc1)
+        //            addLabel(viewModel.disc2)
+        //        if viewModel.hasMoreThanTwoDiscs {
+        addItalicLabel(NSLocalizedString("Extended", comment: ""))
+        //        }
     }
     
     func addLabel(_ text: String) {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = text
+        labelsStack.addArrangedSubview(label)
+    }
+    
+    func addBoldLabel(_ text: String) {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = text
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        labelsStack.addArrangedSubview(label)
+    }
+    
+    func addItalicLabel(_ text: String) {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = text
+        label.font = UIFont.italicSystemFont(ofSize: 14.0)
         labelsStack.addArrangedSubview(label)
     }
 }

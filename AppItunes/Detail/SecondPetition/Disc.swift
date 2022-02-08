@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Discography: Decodable {
+struct Disc: Decodable {
     let artistId: Int?
     let artistName: String?
     let discCount: Int?

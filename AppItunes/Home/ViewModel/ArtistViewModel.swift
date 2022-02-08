@@ -26,12 +26,7 @@ struct ArtistViewModel {
         return artist.primaryGenreName ?? ""
     }
     
-    var discography: String {
+    var disc: String {
         return artist.collectionName ?? ""
-    }
-    
-    var hasMoreThanTwoDiscs: Bool {
-        guard let discography = artist.collectionName else { return false }
-        return discography.count > 2
     }
 }

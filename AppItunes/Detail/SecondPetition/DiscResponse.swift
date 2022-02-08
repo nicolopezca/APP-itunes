@@ -8,7 +8,7 @@
 import Foundation
 
 struct DiscResponse: Decodable {
-    var discs: [Discography]
+    var discs: [Disc]
     var resultCount: Int
     
     enum CodingKeys: String, CodingKey {
