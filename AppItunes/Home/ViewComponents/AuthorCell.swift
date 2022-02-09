@@ -44,7 +44,7 @@ class AuthorCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = text
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
         labelsStack.addArrangedSubview(label)
     }
     

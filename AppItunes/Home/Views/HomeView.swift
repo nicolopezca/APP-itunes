@@ -103,7 +103,7 @@ private extension HomeView {
         //        }
     }
     
-    func obtainArtistsDisc(_ artists: [Artist]?)  {
+    func obtainArtistsDisc(_ artists: [Artist]?) {
         guard let artists = artists else {
             return
         }

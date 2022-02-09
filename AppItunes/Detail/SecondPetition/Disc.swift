@@ -32,4 +32,3 @@ struct Disc: Decodable {
         case wrapperType = "wrapperType"
     }
 }
-

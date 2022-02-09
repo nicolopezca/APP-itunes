@@ -8,6 +8,6 @@
 import Foundation
 
 enum TimeFormat: String {
-    case yyyyMMdd_T_HHmmssZ = "yyyy-MM-dd'T'HH:mm:ssZ"
+    case yyyyMMddTHHmmssZ = "yyyy-MM-dd'T'HH:mm:ssZ"
     case yyyy = "yyyy"
 }

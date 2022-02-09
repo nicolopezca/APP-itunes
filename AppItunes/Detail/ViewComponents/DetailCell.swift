@@ -20,7 +20,7 @@ class DetailCell: UITableViewCell {
     func setViewModel(_ viewModel: DetailViewModel) {
         titleLabel.text = viewModel.title
         yearLabel.text = viewModel.year
-        if let thumbnail = viewModel.thumbnail  {
+        if let thumbnail = viewModel.thumbnail {
             albumImage?.loadImageFromUrl(url: thumbnail)
         }
     }

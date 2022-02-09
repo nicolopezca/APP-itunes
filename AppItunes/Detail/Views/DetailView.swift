@@ -106,7 +106,7 @@ private extension DetailView {
     
     func getDecoder() -> JSONDecoder {
         let formatter = DateFormatter()
-        formatter.dateFormat = TimeFormat.yyyyMMdd_T_HHmmssZ.rawValue
+        formatter.dateFormat = TimeFormat.yyyyMMddTHHmmssZ.rawValue
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         return decoder
