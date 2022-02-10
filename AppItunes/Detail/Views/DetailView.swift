@@ -43,7 +43,8 @@ private extension DetailView {
         configureTable()
     }
     
-    func handleDetailResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Disc]?) -> Void))) {
+    func handleDetailResponse(data: Data?, response: URLResponse?,
+                              error: Error?, completion: @escaping ((([Disc]?) -> Void))) {
         guard let data = getData(data: data, response: response) else {
             completion(nil)
             return
