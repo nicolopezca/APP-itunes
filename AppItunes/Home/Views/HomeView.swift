@@ -90,17 +90,12 @@ private extension HomeView {
         }
     }
     
-    func obtainArtists(_ artists: [Artist]?) {
+    func fillViewModel(_ artists: [Artist]?) {
         guard let artists = artists else {
             return
         }
         // TODO: - review obtain ID
-        //        artists.forEach { artist in
-        //            if let artistId = artist.artistId {
-        //                getDiscographyFromId(artistId)
         self.viewModels = artists.map { ArtistViewModel(artist: $0) }
-        //            }
-        //        }
     }
     
     func obtainArtistsDisc(_ artists: [Artist]?) {
@@ -152,10 +147,10 @@ extension HomeView: UITableViewDataSource {
         return cell
     }
     
-    func callWithUserText(searchedText: String) {
+    func makeFirstCall(searchedText: String) {
         let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
         getAuthorData(searchTerm: cleanSearch) { artists in
-            self.obtainArtists(artists)
+            self.fillViewModel(artists)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -176,7 +171,7 @@ extension HomeView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
-        callWithUserText(searchedText: searchText)
+        makeFirstCall(searchedText: searchText)
         searchBar.resignFirstResponder()
     }
 }

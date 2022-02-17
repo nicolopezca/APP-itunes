@@ -21,38 +21,54 @@ class AuthorCell: UITableViewCell {
     }
     
     func setViewModel(_ viewModel: ArtistViewModel) {
-        addBoldLabel(viewModel.author)
-        addItalicLabel(viewModel.style)
-        addBoldLabel(NSLocalizedString("Discography", comment: ""))
+        addAllLabels(viewModel)
         // TODO: - review discs labels
-        addLabel(viewModel.disc)
-        //            addLabel(viewModel.disc1)
-        //            addLabel(viewModel.disc2)
-        //        if viewModel.hasMoreThanTwoDiscs {
-        addItalicLabel(NSLocalizedString("Extended", comment: ""))
-        //        }
     }
     
-    func addLabel(_ text: String) {
+    func addLabel(_ text: String, font: UIFont) {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = text
+        label.font = font
         labelsStack.addArrangedSubview(label)
     }
     
-    func addBoldLabel(_ text: String) {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.text = text
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
-        labelsStack.addArrangedSubview(label)
+    func addAllLabels(_ viewModel: ArtistViewModel) {
+        addAuthorLabel(viewModel.author)
+        addStyleLabel(viewModel.style)
+        addDiscographyLabel()
+        addDiscLabel(viewModel.disc)
+        addExtendedLabel()
+    }
+}
+
+extension AuthorCell {
+    
+    func addAuthorLabel(_ author: String) {
+        if let boldFont = UIFont(name: "HelveticaNeue-Bold", size: 16.0) {
+            addLabel(author, font: boldFont)
+        } else {
+            addLabel(author, font: UIFont.systemFont(ofSize: 14))
+        }
     }
     
-    func addItalicLabel(_ text: String) {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.text = text
-        label.font = UIFont.italicSystemFont(ofSize: 14.0)
-        labelsStack.addArrangedSubview(label)
+    func addStyleLabel(_ style: String) {
+        addLabel(style, font: UIFont.italicSystemFont(ofSize: 14.0))
+    }
+    
+    func addDiscographyLabel() {
+        if let boldFont = UIFont(name: "HelveticaNeue-Bold", size: 16.0) {
+            addLabel(NSLocalizedString("Discography", comment: ""), font: boldFont)
+        } else {
+            addLabel(NSLocalizedString("Discography", comment: ""), font: UIFont.systemFont(ofSize: 14))
+        }
+    }
+    
+    func addDiscLabel(_ disc: String) {
+        addLabel(disc, font: UIFont.systemFont(ofSize: 14))
+    }
+    
+    func  addExtendedLabel() {
+        addLabel(NSLocalizedString("Extended", comment: ""), font: UIFont.italicSystemFont(ofSize: 14.0))
     }
 }
