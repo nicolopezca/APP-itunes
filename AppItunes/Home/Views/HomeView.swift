@@ -15,12 +15,7 @@ class HomeView: UIView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    private enum Constants {
-        static let preSearchURL = "https://itunes.apple.com/search?term="
-        static let postSearchURL = "&entity=allArtist&attribute=allArtistTerm"
-        static let artistPreSearchURL = "https://itunes.apple.com/lookup?id="
-        static let artistPostSearchURL = "&entity=album"
-    }
+
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
     var id: Int?
@@ -49,47 +44,6 @@ private extension HomeView {
         contentView.frame = self.bounds
     }
     
-    func getAuthorData(searchTerm: String, completion: @escaping ((([Artist]?) -> Void))) {
-        let searchURL = Constants.preSearchURL + searchTerm + Constants.postSearchURL
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: searchURL) else {
-            completion(nil)
-            return
-        }
-        urlSession.dataTask(with: url) { data, response, error in
-            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
-        }.resume()
-    }
-    
-    func getAuthorDisk(id: Int, completion: @escaping ((([Artist]?) -> Void))) {
-        let searchURL = Constants.preSearchURL + String(id) + Constants.artistPostSearchURL
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        let urlSession = URLSession(configuration: urlSessionConfiguration)
-        guard let url = URL(string: searchURL) else {
-            completion(nil)
-            return
-        }
-        urlSession.dataTask(with: url) { data, response, error in
-            self.handleItunesResponse(data: data, response: response, error: error, completion: completion)
-        }.resume()
-    }
-    
-    func handleItunesResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping ((([Artist]?) -> Void))) {
-        guard let data =  getData(data: data, response: response) else {
-            completion(nil)
-            return
-        }
-        do {
-            let itunesResponse = try JSONDecoder().decode(ItunesResponse.self, from: data)
-            completion(itunesResponse.artists)
-        } catch DecodingError.valueNotFound(let type, let context) {
-            print("could not find type \(type) in JSON: \(context.debugDescription)")
-        } catch let error as NSError {
-            NSLog("Error in read(from:ofType:) domain= \(error.domain), description= \(error.localizedDescription)")
-        }
-    }
-    
     func fillViewModel(_ artists: [Artist]?) {
         guard let artists = artists else {
             return
@@ -113,16 +67,6 @@ private extension HomeView {
     
     func configureSearchBar() {
         searchBar.delegate = self
-    }
-    
-    func getData(data: Data?, response: URLResponse?) -> Data? {
-        guard let data = data,
-              let response = response as? HTTPURLResponse,
-              (200...299).contains(response.statusCode)
-        else {
-            return nil
-        }
-        return data
     }
 }
 
@@ -149,17 +93,9 @@ extension HomeView: UITableViewDataSource {
     
     func makeFirstCall(searchedText: String) {
         let cleanSearch = searchedText.replacingOccurrences(of: " ", with: "+")
-        getAuthorData(searchTerm: cleanSearch) { artists in
+        let request = ArtistCall(search: cleanSearch)
+        request.getAuthorData { artists in
             self.fillViewModel(artists)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    func getDiscographyFromId(_ id: Int) {
-        getAuthorDisk(id: id) { artists in
-            self.obtainArtistsDisc(artists)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
