@@ -18,7 +18,6 @@ class HomeView: UIView {
 
     private var viewModels: [ArtistViewModel] = []
     weak var delegate: HomeViewDelegate?
-    var id: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,7 +47,6 @@ private extension HomeView {
         guard let artists = artists else {
             return
         }
-        // TODO: - review obtain ID
         self.viewModels = artists.map { ArtistViewModel(artist: $0) }
     }
     

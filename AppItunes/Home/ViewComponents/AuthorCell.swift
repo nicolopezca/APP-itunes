@@ -22,7 +22,6 @@ class AuthorCell: UITableViewCell {
     
     func setViewModel(_ viewModel: ArtistViewModel) {
         addAllLabels(viewModel)
-        // TODO: - review discs labels
     }
     
     func addLabel(_ text: String, font: UIFont) {

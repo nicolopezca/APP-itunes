@@ -15,7 +15,7 @@ private enum Constants {
 class AlbumCall {
     let url: String
     init(id: Int) {
-        self.url = Constants.artistPreSearchURL+String(id)+Constants.artistPostSearchURL
+        self.url = Constants.artistPreSearchURL + String(id) + Constants.artistPostSearchURL
     }
     
     func getDiscography(completion: @escaping ((([Disc]?) -> Void))) {

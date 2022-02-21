@@ -15,7 +15,7 @@ private enum Constants {
 class ArtistCall {
     let url: String
     init(search: String) {
-        self.url = Constants.preSearchURL+search+Constants.postSearchURL
+        self.url = Constants.preSearchURL + search + Constants.postSearchURL
     }
     func getAuthorData(completion: @escaping ((([Artist]?) -> Void))) {
         let urlSessionConfiguration = URLSessionConfiguration.default
