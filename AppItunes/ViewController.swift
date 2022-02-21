@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeView.delegate = self
-    }  
+    }
 }
 
 extension ViewController: HomeViewDelegate {

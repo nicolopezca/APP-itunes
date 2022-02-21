@@ -12,9 +12,9 @@ struct DetailViewModel {
     private enum Constants {
         static let defaultImageURL = "http://lamiradadelreplicante.com/wp-content/uploads/2015/06/swift.jpg"
     }
-    let discography: Discography
+    let discography: Disc
     
-    init(discography: Discography) {
+    init(discography: Disc) {
         self.discography = discography
     }
     

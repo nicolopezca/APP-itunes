@@ -13,13 +13,4 @@ struct Artist: Decodable {
     let discNumber: Int?
     let primaryGenreName: String?
     let collectionName: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case artistId = "artistId"
-        case artistName = "artistName"
-        case discCount = "discCount"
-        case discNumber = "discNumber"
-        case primaryGenreName = "primaryGenreName"
-        case collectionName = "collectionName"
-    }
 }
